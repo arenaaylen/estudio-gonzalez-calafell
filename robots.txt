@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://DOMINIO.COM/sitemap.xml
+Sitemap: https://estudio-g-calafell.vercel.app/sitemap.xml

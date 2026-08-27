@@ -16,23 +16,15 @@ favicon.png · apple-touch-icon.png · icon-512.png · logo.png
 
 ---
 
-## 1. Poner la URL definitiva
+## 1. URL ✅
 
-Si no hay dominio propio, Vercel asigna uno fijo del tipo `https://nombre-del-proyecto.vercel.app`.
-Ese sirve perfecto: no caduca y cambia solo si se renombra el proyecto.
+Cargada en todos los archivos:
 
-El orden es: **deployar primero, copiar la URL, y recién ahí correr el script**.
-
-```bash
-./set-domain.sh https://nombre-del-proyecto.vercel.app
-vercel --prod     # o push al repo
+```
+https://estudio-g-calafell.vercel.app
 ```
 
-Reemplaza `DOMINIO.COM` en `index.html`, `privacidad.html`, `terminos.html`, `robots.txt` y `sitemap.xml`.
-
-Por qué no se puede automatizar: `og:image` tiene que ser una URL absoluta, y los scrapers de WhatsApp e Instagram no ejecutan JavaScript, así que no hay forma de completarla en el navegador. Hasta que se corra el script, el link pegado en un chat sale sin imagen de preview — el sitio funciona igual.
-
-Si más adelante compran un dominio, se vuelve a correr el mismo script con la URL nueva.
+El día que compren un dominio propio, correr `./set-domain.sh https://el-dominio-nuevo.com.ar` y volver a publicar.
 
 ## 2. Píxel de Meta *(opcional)*
 
@@ -63,18 +55,31 @@ Queda opcional, si quieren dejarlo a prueba de reclamos: agregar el nombre y ape
 
 ## 4. Subir
 
-**Opción A — desde la web (más rápido)**
+**Opción A — Vercel Drop (sin terminal, sin GitHub)**
 
-1. Subir esta carpeta a un repo de GitHub.
+1. Crear una cuenta gratis en [vercel.com](https://vercel.com).
+2. Ir a **[vercel.com/drop](https://vercel.com/drop)**.
+3. Arrastrar el `.zip` (o la carpeta descomprimida) a la página.
+4. Elegir el equipo y escribir el nombre de proyecto: **`estudio-g-calafell`**.
+5. **Deploy**.
+
+**Para volver a publicar sobre el mismo proyecto:** Drop no actualiza un proyecto existente, siempre crea uno nuevo. Para conservar la URL `estudio-g-calafell.vercel.app` hay que borrar el proyecto anterior en el dashboard (Settings → abajo de todo → Delete Project) y volver a arrastrar con el mismo nombre.
+
+Si van a tocar la landing más de una o dos veces, conviene pasar a la opción B: se conserva la URL y no hay que borrar nada.
+
+**Opción B — GitHub (si van a hacer cambios seguido)**
+
+1. Crear un repo en github.com y subir estos archivos (se pueden arrastrar desde la web de GitHub).
 2. vercel.com → Add New → Project → importar el repo.
-3. Framework Preset: **Other**. Build Command: vacío. Output Directory: vacío (raíz).
-4. Deploy.
+3. Framework Preset: **Other**. Build Command y Output Directory: vacíos.
+4. Deploy. Desde ahí, cada cambio que se pushee se publica solo.
 
-**Opción B — desde la terminal**
+**Opción C — terminal**
+
+Terminal en Mac o PowerShell en Windows, parado dentro de esta carpeta, con Node instalado:
 
 ```bash
 npm i -g vercel
-cd esta-carpeta
 vercel          # preview
 vercel --prod   # producción
 ```
@@ -110,7 +115,7 @@ Lo más barato para arrancar: un Google Apps Script publicado como Web App que e
 - [ ] Los 5 botones de WhatsApp abren el chat con el número correcto
 - [ ] El calificador avanza los 3 pasos y arma el mensaje con las respuestas
 - [ ] `/privacidad` y `/terminos` cargan (sin `.html` en la URL)
-- [ ] Correr `./set-domain.sh` con la URL final y redeployar
+- [ ] El proyecto quedó con el nombre `estudio-g-calafell`
 - [ ] Pegar el link en un chat de WhatsApp: tiene que salir la imagen con el titular
 - [ ] Meta Events Manager marca `PageView`, `Contact` y `Lead`
 - [ ] PageSpeed Insights en mobile

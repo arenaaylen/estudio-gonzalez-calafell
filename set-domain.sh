@@ -7,7 +7,7 @@ URL=$(printf '%s' "$1" | sed 's:/*$::')          # saca la barra final si la tie
 FILES="index.html privacidad.html terminos.html robots.txt sitemap.xml"
 for f in $FILES; do
   [ -f "$f" ] || continue
-  sed -i.bak "s|https://DOMINIO.COM|$URL|g" "$f" && rm -f "$f.bak"
+  sed -i.bak -E "s|https://[a-z0-9.-]+\\.(vercel\\.app|com|com\\.ar|ar)|$URL|g" "$f" && rm -f "$f.bak"
 done
 echo "Listo. Dominio configurado en: $URL"
 echo "Ahora: vercel --prod   (o push al repo)"
